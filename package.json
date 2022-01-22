@@ -1,0 +1,77 @@
+{
+  "name": "docs-web-infrastructure",
+  "version": "1.0.0",
+  "description": "前端基础建设文档库，包含中后台前端脚手架、组件库、后台脚手架等。",
+  "private": true,
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src",
+    "links": "cd ../shepherd-vue && yarn link && cd ../antdv-kit && yarn link && cd ../style-utils && yarn link && cd ../docs-web-infrastructure && yarn link @wytxer/shepherd-vue && yarn link @wytxer/antdv-kit && yarn link @wytxer/style-utils"
+  },
+  "dependencies": {
+    "ant-design-vue": "^1.7.8",
+    "axios": "^0.24.0",
+    "core-js": "^3.20.2",
+    "highlight.js": "^9.11.0",
+    "vue": "^2.6.14",
+    "vue-draggable-resizable": "^2.2.0",
+    "vue-highlight.js": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-standard": "^5.1.2",
+    "@vuepress/plugin-back-to-top": "^1.9.5",
+    "@vuepress/plugin-medium-zoom": "^1.9.5",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "less": "^3.13.1",
+    "less-loader": "^4.1.0",
+    "lint-staged": "^9.5.0",
+    "vue-template-compiler": "^2.6.14",
+    "vuepress": "^1.9.5",
+    "vuepress-theme-antdocs": "^1.3.5"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/*.{js,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": "16"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/wytxer/docs-web-infrastructure/#readme",
+  "keywords": [
+    "docs",
+    "antdv kit docs",
+    "scaffold docs",
+    "web infrastructure"
+  ],
+  "author": {
+    "name": "wytxer",
+    "url": "https://github.com/wytxer"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:wytxer/docs-web-infrastructure.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wytxer/docs-web-infrastructure/issues"
+  }
+}

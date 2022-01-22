@@ -1,0 +1,30 @@
+// 全局生效，具有比默认样式更高的优先级，如果对生成的页面样式有需要调整的，在此处添加
+// https://vuepress.vuejs.org/zh/config/#styling
+
+.home
+  min-height calc(100vh - 104px)
+
+// 解决样式冲突问题
+table
+  display table
+  margin 0
+  tr, td, th
+    border none
+    background-color transparent
+  tr:nth-child(2n)
+    background-color transparent
+
+.ant-calendar-table th
+  text-align center
+  width 100px
+
+.hero-logo
+  border-radius 50%
+
+.image-box
+  text-align center
+  padding 0.5em 0 1em
+  img
+    max-width 100%
+    box-shadow 0 2px 8px rgba(3, 3, 3, 0.1)
+    border-radius 6px
