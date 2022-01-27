@@ -21,6 +21,11 @@ import AKit from '@wytxer/antdv-kit'
 
 Vue.use(AKit)
 
+// 全局设置 pageSize 和 textFill
+Vue.use(AKit, {
+  pageSize: 20,
+  textFill: '-'
+})
 ```
 
 
