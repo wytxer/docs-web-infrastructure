@@ -28,12 +28,13 @@ title: 中后台前端脚手架
 | 错误捕获 | 可一键开启和关闭错误日志，错误排查和定位可视化管理 | √ |
 | 请求 | 基于 axios，支持文件上传、下载、自动检测 header、自定识别 mockUrl 与 url、支持多域名单域名，覆盖了绝大部分作为一个请求的使用场景 | √ |
 | 工具库 | 内置了变量类型判断、uuid 生成、常用手机号、身份证、密码校验等其他常用函数，全局可调用，方便快捷 | √ |
-| 自定义指令 | 预留了统一编写全局自定义指令的位置，全局添加指令和功能更加统一 | √ |
-| 打包 | 支持私有化打包（内网环境）和非私有化打包，一键开启和关闭，无需关注繁杂的 webpack 配置 | √ |
+| 自定义扩展 | 包含对 Vue.prototype 的扩展、自定义指令、组件库等，全局添加指令和功能更加统一 | √ |
+| 打包 | 支持私有云打包（内网环境）和非私有云打包，一键开启和关闭，无需关注繁杂的 webpack 配置 | √ |
 | mock 服务 | 内置了 mocker-api 和 mockjs2，应对不同的使用场景，且做了兼容，只需要一种 mock 写法即可，不再因为迟迟没提供接口而等待 | √ |
 | eslint | 内置了比较严格和完整的 eslint 规则，保证了代码规范，协同开发更高效 | √ |
 | store | 内置了 store，可直接获取到用户信息、全局配置等，拿来即用 | √ |
 | 用户中心 | 内置了登录、注册、找回密码页面，简单的对接后端接口即可完成账号体系的构建 | √ |
+| 多环境 | 内置了预览环境、演示环境、测试环境、正式环境打包配置，可满足多环境打包部署要求 | √ |
 | [模板库](/docs/tv2m-template.html) | 提供了一套模板库来极速创建页面，开发效率显著提升 | √ |
 | 单元测试 | 集成完整的测试用例，让脚手架更健壮 | feature |
 
@@ -42,36 +43,40 @@ title: 中后台前端脚手架
 
 ```bash
 .
-├── README.md
+├── README.md              # 搞事之前请先白嫖一下我
 ├── babel.config.js
-├── build
-│   ├── plugin.config.js   # 自定义的 webpack 插件配置
-│   └── project.config.js  # 项目的配置文件，包含打包配置、mock 服务、cdn 配置、后端接口配置、前缀配置等
-├── mock                   # mock 模块
+├── config                 # 项目配置
+│   ├── config.js          # 提供给 vue.config.js 使用的自定义配置，抽离了相对独立部分
+│   ├── project.config.js  # 提供给 Node.js 部署包的配置项
+│   └── theme.plugin.js    # 主题配置，自定义主题配置的时候会用到
+├── jsconfig.json
+├── mock                   # mock 数据服务
 │   ├── index.js
 │   ├── modules            # 所有的 mock 数据定义在这里
-│   └── utils.js           # 内置处理 mock 数据的工具函数库
+│   └── utils.js           # 内置处理 mock 数据的工具函数
 ├── package.json
 ├── public
 │   ├── favicon.ico
 │   └── index.html
-├── server
-│   └── index.js           # 提供给 wy app 部署包的中间件
-├── src
-│   ├── api                # 请求定义模块
-│   ├── app.vue
-│   ├── assets             # 静态资源模块
-│   ├── components         # 内置组件模块，业务需要的组件也在这里面定义
-│   ├── core               # 项目全局的组件配置、权限指令定义等
-│   ├── layouts            # 布局
-│   ├── main.js            # 入口文件
-│   ├── router             # 路由配置
-│   ├── store              # 全局的 store 配置
-│   ├── utils              # 全局工具类函数
-│   └── views              # 页面
-├── vue.config.js          # vue-cli 提供的配置文件
+├── server                # Node.js 部署包中间件
+│   └── index.js
+├── src                   # 源码目录
+│   ├── api               # 请求
+│   ├── app.less          # 公共样式
+│   ├── app.vue           # 根组件
+│   ├── assets            # 静态资源
+│   ├── components        # 组件
+│   ├── extends           # 扩展，包含对 Vue.prototype 的扩展、自定义指令、组件库等
+│   ├── layouts           # 布局
+│   ├── main.js           # 入口文件
+│   ├── router            # 路由配置
+│   ├── store             # store 配置
+│   ├── utils             # 工具库
+│   └── views             # 页面
+├── tests                 # 单元测试
+│   └── unit
+├── vue.config.js         # vue-cli 提供的配置文件
 └── yarn.lock
-
 ```
 
 
@@ -82,65 +87,109 @@ title: 中后台前端脚手架
 ```bash
 # 安装
 yarn install
-
 # 启动开发服务
-yarn dev
-
+yarn serve
 # 生产环境打包
 yarn build
-
 # 测试环境打包
-yarn build:dev
+yarn build:test
 ```
 
 
 ## 项目配置
 
-脚手架将零散的配置功能提取到了 `project.config.js` 中进行集中管理，可在 `project.config.js` 中修改接口前缀、私有化打包、自定义主题色配置、后端接口配置等。
+脚手架约定了一份环境变量配置，用来实现对各个功能的切换和支持，各个变量的作用如下：
 
-- 在 `client.env.API_BASE_URL` 字段和 `server.proxyHost.development` 字段**修改接口前缀和接口请求地址**
+### BASE_URL
+
+路由地址前缀，vue-cli 提供的环境变量，一般不需要改，效果同 vue.config.js 中的 `publicPath`，若有对 `publicPath` 的修改需求都强烈建议来修改 `BASE_URL` 变量。
+
+
+### VUE_APP_API_PREFIX
+
+请求接口的 url 前缀，跟随后端开发提供的来改，若不需要前缀，可设置为「/」。
+
+
+### VUE_APP_LS_PREFIX
+
+脚手架内置了 vue-ls 这个库来操作 storage，此变量是 namespace 字段配置。
+
+
+### VUE_APP_PRIVATE
+
+是否属于私有云部署，就是是否部署到内网，如果项目本身使用到的组件很少，也可以设置为 `true`，以此来减少没有必要的 cdn 资源加载，如果使用了自定义主题功能，一定要设置成 `true`，否则自定义主题打包后不生效。
+
+
+### VUE_APP_USE_MOCKER
+
+内置 `mocker-api`（可以看到网络请求）和 `mockjs2`（看不到网络请求）两个 mock 服务，设置为 `true` 标识使用 `mocker-api`，设置成 `false` 使用 `mockjs2`。
+
+
+### VUE_APP_BUILD_ENV
+
+打包环境，部署到不同生产环境的区分。默认是 production，即生产环境，已在 package.json 中内置了预览环境、测试环境、演示环境和生产环境的配置，可根据业务自行添加更多的环境配置。
+
+
+### VUE_APP_THEME_COLOR
+
+主题色，默认是跟随 `ant-design-vue` 的主题色 `#1890ff`，自定义主题色时，主色值只需要修改这一个地方即可，然和在 `config/config.s` 下的 `modifyVars` 字段中配置自定义的主题色变量。跟自定义主题色相关的改动，一般也只需要改动这两个地方即可。
+
+
+### VUE_APP_BUILD_REPORT
+
+是否开启打包分析，当发现打包后的 dist 资源文件很大时，设置为 `true`，每次打包完毕后会自动打开本次打包的可视化分析页面。
+
+
+:::tip 提示
+同时，脚手架基于 vue-cli 提供的 vue.config.js 配置能力，封装了对打包优化、主题配置和接口代理配置功能。
+:::
+
+### 打包优化
+
+将 `VUE_APP_PRIVATE` 设置为 `false`，打包时就会自动忽略常用的第三方库而使用 cdn 加载，减少了打包后的资源大小，提高了打包速度。
+
+将 `VUE_APP_PRIVATE` 设置为 `true`，会将所有资源都打包到 dist，同时对第三方库进行了简单的分割以减小单个文件的大小。
+
+
+### 主题配置
+
+在 `config/theme.config.js` 中封装了自定义主题色功能的支持，配合 `VUE_APP_THEME_COLOR` 变量使用。
+
+
+### 接口代理配置
+
+在 `config/theme.config.js` 的 `proxy` 字段中配置接口请求地址。
 
 ```js
 {
-  /**
-   * 请求接口的 url 前缀，跟随后端开发提供的来改，需要跟 server.proxyHost 里面的前缀配置一致
-   */
-  API_BASE_URL: '/admin',
-}
-
-{
-  // 请求接口的 url 前缀，跟随后端开发提供的来改
-  '^/api': {
+  // 系统默认的前缀配置
+  [apiPrefix]: {
     target: 'http://127.0.0.1:7001',
     ws: false,
     changeOrigin: true
+  },
+  // 用户中心接口前缀配置
+  '^/account': {
+    target: 'http://account.example.com',
+    ws: false,
+    changeOrigin: true,
+    pathRewrite: {
+      '^/account': ''
+    }
   }
 }
 ```
 
-- 在 `client.env.IS_PRIVATE` 字段**修改私有化打包**
 
-```js
-{
-  /**
-   * 是否是私有化项目，就是是否部署到内网，如果项目本身使用到的 ui 库组件很少，也可以设置为 true，以此来减少没有必要的 cdn 资源加载，如果使用了自定义主题功能，一定要设置成 true，否则自定义主题打包后不生效
-   */
-  IS_PRIVATE: false
-}
-```
+## 项目配置
 
-[更多配置项查看和修改](https://github.com/wytxer/template-vue2-manage/blob/main/build/project.config.js)
-
-
-## 开发设置
-
-项目启动后，在右边会始终有一个「开发设置」按钮，展开后的完整配置项如下：
+项目启动后，在右边会始终有一个「项目配置」按钮，展开后的完整配置项如下：
 
 <div class="image-box" style="text-align: left">
   <img src="/docs/tv2mt-use-dev-drawer.png" style="width: 50%" />
 </div>
 
-在这里可以设置菜单风格、主题色、导航模式快速预览效果，确定好最终的配置后，可在 `src/store/modules/app.js` 中同步修改。
+在这里可以设置菜单风格、主题色、导航模式快速预览效果，确定好最终的配置后，可在 `src/store/modules/app.js` 中同步修改，以下是支持的完整配置项：
 
 ```js
 {
@@ -174,7 +223,7 @@ yarn build:dev
   /**
    * 默认的主题色，跟随 ant-design-vue 库
    */
-  themeColor: Vue.ls.get(types.THEME_COLOR, '#1890ff'),
+  themeColor: Vue.ls.get(types.THEME_COLOR, process.env.VUE_APP_THEME_COLOR),
   /**
    * 路由模式
    * static：静态。如果是静态模式，路由的增删改在 src/router/route-static.js 中完成
@@ -200,7 +249,7 @@ yarn build:dev
 ```
 
 :::tip 提示
-实际打包上线后，这个「开发设置」入口会自动隐藏
+正式环境打包上线后，这个「开发设置」入口会自动隐藏
 :::
 
 
@@ -210,14 +259,14 @@ yarn build:dev
 
 | 字段名 | 注解 |
 | ---- | ---- |
-| url | 请求地址，如果定义了 url 就优先使用，否则使用 mockUrl，默认不以斜杠开头，如果以斜杠开头就不会拼接 API_BASE_URL 字段 |
+| url | 请求地址，如果定义了 url 就优先使用，否则使用 mockUrl，默认不以斜杠开头，如果以斜杠开头就不会拼接 `VUE_APP_API_PREFIX` 变量 |
 | mockUrl | mock 服务的请求地址，定义了就使用 |
 | method | 请求方式，支持 get、post、put、delete 等 |
 | data | 如果是 post，data 方式传递的参数是 json 类型，可以和下面的 params 字段一起使用 |
-| params | 传递的参数是字符串类型的，拼接在 url 后面的，类似 /a/b?id=1&type=2 这种，如果是 get 请求，只能通过 params 传递参数 |
-| headerType | 请求头类型，默认是 json，对应的 Content-Type 是「application/json」，设置成 form 的时候，Content-Type 是「application/x-www-form-urlencoded; charset=UTF-8」，设置成 upload，Content-Type 是「multipart/form-data」，设置成 download，headers.resType 是 blob，会自动下载文件，配合 fileName 字段自定义下载文件的名称，设置成 blob，返回文件流信息 |
-| fileName | 配合 headerType 等于 download 时使用，用来自定义下载文件的名称 |
-| closeAutoTips | 请求失败之后默认会抛出后端给的错误，closeAutoTips 设置为 true 可以关闭掉这个行为 |
+| params | 传递的参数是字符串类型的，拼接在 url 后面的，类似 `/a/b?id=1&type=2` 这种，如果是 get 请求，只能通过 params 传递参数 |
+| headerType | 请求头类型，默认是 `json`，对应的 `Content-Type` 是 `application/json`，设置成 form 的时候，`Content-Type` 是 `application/x-www-form-urlencoded; charset=UTF-8`，设置成 `upload`，`Content-Type` 是 `multipart/form-data`，设置成 `download`，`headers.resType` 是 `blob`，会自动下载文件，配合 `fileName` 字段自定义下载文件的名称，设置成 `blob`，返回文件流信息 |
+| fileName | 配合 `headerType` 等于 `download` 时使用，用来自定义下载文件的名称 |
+| closeAutoTips | 请求失败之后默认会抛出后端给的错误，`closeAutoTips` 设置为 `true` 可以关闭掉这个行为 |
 <br>
 
 接口 code 配置参见[这里](https://github.com/wytxer/template-vue2-manage/blob/main/src/utils/http.js#L7)
@@ -227,8 +276,8 @@ yarn build:dev
 ```js
 // 发起 post 请求，并传递 data 和 params 参数，然后关闭自动提示
 export function queryTableList (data) {
-  return http({
-    // 定义了 url 就会优先使用，否则使用 mockUrl，url 不以 / 开头时，会自动拼接 BASE_URL 前缀
+  return request({
+    // 定义了 url 就会优先使用，否则使用 mockUrl，url 不以 / 开头时，会自动拼接 VUE_APP_API_PREFIX 前缀
     url: 'table/list',
     mockUrl: '/mock/table/list',
     method: 'post',
@@ -240,20 +289,18 @@ export function queryTableList (data) {
     closeAutoTips: true
   })
 }
-
 // 发起 get 请求
 export function queryGetDemo (params) {
-  return http({
-    // 接口以 / 开头时，会自动忽略 BASE_URL 配置，这种使用场景一般会配合设置一下代理
+  return request({
+    // 接口以 / 开头时，会自动忽略 VUE_APP_API_PREFIX 配置，这种使用场景一般会配合设置一下代理
     url: '/account/table/list',
     method: 'get',
     params
   })
 }
-
 // post 请求下载文件
 export function queryDownloadDemo (data) {
-  return http({
+  return request({
     url: 'file/download',
     method: 'post',
     // 设置为 download 进行文件下载，内部封装了文件下载动作，调用后会自动下载文件，无需再做其他处理
@@ -264,10 +311,9 @@ export function queryDownloadDemo (data) {
     data
   })
 }
-
 // 获取文件流自定义处理
 export function queryContentBlob (data) {
-  return http({
+  return request({
     url: 'file/download',
     method: 'post',
     data,
@@ -289,7 +335,6 @@ const selectData = [
   { value: '1', label: '正常' },
   { value: '2', label: '禁用' }
 ]
-
 module.exports = {
   'POST /select/list': selectData
 }
@@ -299,7 +344,6 @@ module.exports = {
 
 ```js
 const select = require('./modules/select')
-
 const data = {
   ...addPrefix(select)
 }
@@ -310,7 +354,7 @@ const data = {
 ```js
 // 获取下拉列表
 export function querySelectData (params) {
-  return http({
+  return request({
     mockUrl: '/mock/select/list',
     method: 'get',
     params
@@ -345,8 +389,7 @@ querySelectData()
   /**
    * 路由模式
    * static：静态。如果是静态模式，路由的增删改在 src/router/route-static.js 中完成
-   * dynamic：动态。如果是动态模式，路由的增删改在 src/router/route-dynamic.js 中完成，每次
-   * 在 routeComponents 中新增一个路由页面之后，再去更新后端的路由菜单
+   * dynamic：动态。如果是动态模式，路由的增删改在 src/router/route-dynamic.js 中完成，每次在 routeComponents 中新增一个路由页面之后，再去更新后端的路由菜单
    */
   routeMode: 'dynamic'
 }
@@ -357,10 +400,10 @@ querySelectData()
 | 字段名 | 注解 |
 | ---- | ---- |
 | path | 访问路径，不带斜杠，相对路径，最终会组装成绝对路径 |
-| component | 对应的组件，静态路由这个值是一个 import 导入的一个页面对象，动态路由是 routeComponents 里面定义的 key |
+| component | 对应的组件，静态路由这个值是一个 import 导入的一个页面对象，动态路由是 `routeComponents` 里面定义的 key |
 | title | 当前页面的标题，在面包屑导航和菜单导航里面显示 |
 | icon | 菜单前面的 Icon 图标，这个顶级菜单才会设置，目前支持的 Icon 是 antd 的 Icon 组件内的，如果想要自定义图标，需要引入自定义 Icon 组件 |
-| meta | 路由的元信息，如果是静态路由，这里面包含了 title、icon、hidden、target、href 和 hideChildren 这 6 个字段 |
+| meta | 路由的元信息，如果是静态路由，这里面包含了 `title`、`icon`、`hidden`、`target`、`href` 和 `hideChildren` 这 6 个字段 |
 | hidden | 设置当前路由是否在菜单导航中显示 |
 | hideChildren | 设置当前路由的子路由是否在菜单导航中显示 |
 | children | 子路由 |
@@ -448,7 +491,7 @@ querySelectData()
 }]
 ```
 
-实际业务中，可能还有 hidden、target、createdAt 等字段，可视情况自行添加。
+实际业务中，可能还有 `hidden`、`target`、`createdAt` 等字段，可视情况自行添加。
 
 
 ## 权限
@@ -477,26 +520,75 @@ if (this.$auth('listEdit')) {
 ```
 
 
-## 使用 Node.js 中间层
+## 样式
 
-待补充
+脚手架内置了样式库，样式库使用[参见这里](/docs/style-utils.html)。
+
+脚手架也将 `ant-design-vue` 的主题变量添加到了全局，你可以在任意的 less 中使用其中的变量，就像这样：
+
+```less
+.ant-card {
+  color: @main-color !important;
+}
+.C-FAIL {
+  color: @error-color;
+}
+```
+
+完整的变量[参见这里](https://github.com/vueComponent/ant-design-vue/blob/master/components/style/themes/default.less)
+
+同时，脚手架为了方便扩展也自定义了一部分 less 变量，可以在 `src/components/index.less` 中找到。
 
 
-## 独立部署
+## 使用模板库
 
-待补充
+脚手架开发了一套配套的模板库，可以方便的创建各种组件和页面，极大提高开发效率，具体使用[参见这里](/docs/tv2m-template.html)
 
 
 ## 发布
 
-待补充
+脚手架内置了生产环境、测试环境、演示环境和预览环境，命令都是配置好的，可直接执行对应的命令进行打包：
+
+```bash
+# 生产环境打包
+yarn build
+
+# 测试环境打包
+yarn build:test
+
+# 演示环境打包
+yarn build:demo
+
+# 预览环境打包
+yarn build:preview
+```
+
+:::tip 提示
+预览环境是脚手架自带的环境，会将「项目配置」功能打包出来，具体效果可[参见这里](http://tv2.manage.bszhct.com)
+:::
+
+
+## 部署
+
+### 部署到后端服务器
+
+直接将打包的 dist 静态资源复制到对应后端的静态资源目录即可。例如 Java 做后端的话可以放到 `src/main/resources/static` 下，或者放到 `src/main/webapp` 下。
+
+### 部署到 nginx 服务器
+
+直接将打包的 dist 静态资源复制到 nginx 指定的静态资源目录即可。
+
+### 使用 wy app 部署
+
+`wy` 命令是 `wy-cli` 提供的命令，具体使用[参见这里](/docs/cli.html)
+
+需要先执行 `yarn build` 打包出来 dist 静态资源包，然后执行 `wy tar` 打包成一个 Node.js 部署包。
+
+然后将部署包上传到后端服务器，解压后在根目录执行 `wy app` 命令一键启动即可。
+
+`wy app` 启动使用的配置文件参见 `config/project.config.js`。
 
 
 ## 常见问题
 
 待补充
-
-
-## GitHub
-
-[点我获取源代码](https://github.com/wytxer/template-vue2-manage)
