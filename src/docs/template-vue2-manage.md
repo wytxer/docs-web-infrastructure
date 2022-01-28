@@ -181,12 +181,12 @@ yarn build:test
 ```
 
 
-## 项目配置
+## 定制
 
-项目启动后，在右边会始终有一个「项目配置」按钮，展开后的完整配置项如下：
+项目启动后，在右边会始终有一个「定制」按钮，展开后的完整配置项如下：
 
 <div class="image-box" style="text-align: left">
-  <img src="/docs/tv2mt-use-dev-drawer.png" style="width: 50%" />
+  <img src="/docs/tv2mt-use-dev-drawer.jpg" style="width: 50%" />
 </div>
 
 在这里可以设置菜单风格、主题色、导航模式快速预览效果，确定好最终的配置后，可在 `src/store/modules/app.js` 中同步修改，以下是支持的完整配置项：
@@ -249,7 +249,7 @@ yarn build:test
 ```
 
 :::tip 提示
-正式环境打包上线后，这个「开发设置」入口会自动隐藏
+正式环境打包上线后，这个「定制」入口会自动隐藏
 :::
 
 
@@ -564,7 +564,7 @@ yarn build:preview
 ```
 
 :::tip 提示
-预览环境是脚手架自带的环境，会将「项目配置」功能打包出来，具体效果可[参见这里](http://tv2.manage.bszhct.com)
+预览环境是脚手架自带的环境，会将「定制」功能打包出来，具体效果可[参见这里](http://tv2.manage.bszhct.com)
 :::
 
 
@@ -591,4 +591,70 @@ yarn build:preview
 
 ## 常见问题
 
-待补充
+### 如何添加临时的动态路由？
+
+1、先找到 `src/api/user.js` 里面的 **getMenus** 方法
+
+2、使用 **.then** 修改返回值
+
+```js
+// 获取菜单树
+export function getMenus (data) {
+  return request({
+    method: 'post',
+    url: '',
+    mockUrl: '/mock/menus',
+    data
+  })
+    // 临时添加的部分
+    .then(res => {
+      const data = res.data || []
+      // 添加的路由一定都是挂在 / 下面的
+      const route = data.find(item => item.path === '/') || {}
+      route.children = route.children || []
+      // 添加子菜单
+      route.children.push({
+        path: 'form',
+        component: 'form',
+        title: '表单',
+        icon: 'form'
+      })
+      // 最后一定要将 res 返回去
+      return res
+    })
+}
+
+```
+
+
+### 业务通用的常量数据定义在哪里？
+
+建议定义在 `src/utils/const.js` 里面，例如：
+
+```js
+export const STATUS = [{
+  id: 1, name: '状态一'
+}, {
+  id: 1, name: '状态二'
+}, {
+  id: 1, name: '状态三'
+}]
+```
+
+:::tip 提示
+js 里面通过 this.$const 访问，template 里面通过 $const 访问
+:::
+
+
+### 上传下载文件为什么报接口 404 的错误？
+
+上传和下载默认使用 `src/api/index.js` 里面定义的接口，需要改成自己的业务接口，例如：
+
+```js
+export default {
+  // 上传
+  upload: `${API_PREFIX}/upload.json`,
+  // 下载
+  download: `${API_PREFIX}/download.json`
+}
+```
