@@ -580,13 +580,18 @@ yarn build:preview
 
 ### 使用 wy app 部署
 
-`wy` 命令是 `wy-cli` 提供的命令，具体使用[参见这里](/docs/cli.html)
+`wy` 命令是 `wy-cli` 提供的命令，具体使用[参见这里](/docs/wy-cli.html)
 
 需要先执行 `yarn build` 打包出来 dist 静态资源包，然后执行 `wy tar` 打包成一个 Node.js 部署包。
 
 然后将部署包上传到后端服务器，解压后在根目录执行 `wy app` 命令一键启动即可。
 
 `wy app` 启动使用的配置文件参见 `config/project.config.js`。
+
+
+## GitHub
+
+[脚手架 GitHub 地址](https://github.com/wytxer/template-vue2-manage)
 
 
 ## 常见问题

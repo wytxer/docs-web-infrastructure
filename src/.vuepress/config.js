@@ -24,7 +24,7 @@ module.exports = {
       { text: '组件库', link: '/components/quick-start' },
       { text: '中后台前端脚手架', link: '/docs/template-vue2-manage' },
       { text: '后台脚手架', link: '/docs/template-node-egg' },
-      { text: '小工具', link: '/docs/cli' }
+      { text: '小工具', link: '/docs/wy-cli' }
     ],
     // 侧边栏设置
     sidebar: {
@@ -72,7 +72,7 @@ module.exports = {
       '/docs/': [
         {
           title: '小工具',
-          path: 'cli'
+          path: 'wy-cli'
         },
         {
           title: '后台脚手架',
@@ -96,7 +96,7 @@ module.exports = {
         },
         {
           title: '新手引导组件',
-          path: 'shepherd'
+          path: 'shepherd-vue'
         }
       ]
     },

@@ -224,7 +224,7 @@ ctx.session.id = 1
 ctx.service.user.info(ctx.session.id)
 ```
 
-而中后台接口服务获取需要使用 `ctx.cookies.get(key, cookie)` 方法，具体用法[参见这里](https://eggjs.org/zh-cn/core/cookie-and-session.html)。
+而中后台接口服务获取需要使用 `ctx.cookies.get(key, cookie)` 方法，具体用法参见这里[ctx.cookies 使用文档](https://eggjs.org/zh-cn/core/cookie-and-session.html)。
 
 
 ### 安全策略配置
@@ -271,7 +271,7 @@ config.cors = {
 
 内置 egg-swagger-doc 插件，按照约定书写接口注释即可自动生成接口使用文档。所有的数据模型结构都在 `app/contract` 中定义。
 
-具体使用文档[参见这里](https://github.com/Yanshijie-EL/egg-swagger-doc)，这里就不赘述了。
+具体使用文档参见这里[egg-swagger-doc 使用文档](https://github.com/Yanshijie-EL/egg-swagger-doc)，这里就不赘述了。
 
 若不需要此功能，也可在 `config/plugin.js` 中禁用自动生成文档功能：
 
@@ -457,11 +457,11 @@ yarn stop
 ```
 
 
+## GitHub
+
+[后台脚手架 GitHub 地址](https://github.com/wytxer/template-node-egg)
+
+
 ## 常见问题
 
 待补充
-
-
-## GitHub
-
-[点我获取源代码](https://github.com/wytxer/template-node-egg)

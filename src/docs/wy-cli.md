@@ -20,10 +20,10 @@ npm i @wytxer/wy-cli -g
 目前支持的脚手架模板：
 
 ```bash
-◯ 后台管理系统（Vue.js 2.x + Vue Router + Vuex + Ant Design Vue）
+◯ 中后台前端脚手架（Vue.js 2.x + Vue Router + Vuex + Ant Design Vue）
 ◯ 组件（Vue.js 2.x + Vue Router + Vuex）
 ◯ 示例（Vue.js 2.x + Vue Router + Vuex）
-◯ 后台（Node.js + Egg.js + Sequelize）
+◯ 后台脚手架（Node.js + Egg.js + Sequelize）
 ◯ 命令行工具（Node.js + TypeScript + Commander）
 ```
 
