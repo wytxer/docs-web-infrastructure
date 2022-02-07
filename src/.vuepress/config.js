@@ -100,8 +100,8 @@ module.exports = {
         }
       ]
     },
-    // 将同时提取 markdown 中的 h2 显示在侧边栏上
-    sidebarDepth: 1,
+    // 将同时提取 markdown 中的 h2、h3 显示在侧边栏上
+    sidebarDepth: 2,
     // 上次更新
     lastUpdated: '最后更新时间'
   },
