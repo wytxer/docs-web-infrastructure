@@ -98,50 +98,52 @@ yarn build:test
 
 ## 项目配置
 
+### 环境变量
+
 脚手架约定了一份环境变量配置，用来实现对各个功能的切换和支持，各个变量的作用如下：
 
-### BASE_URL
+#### BASE_URL
 
 路由地址前缀，vue-cli 提供的环境变量，一般不需要改，效果同 vue.config.js 中的 `publicPath`，若有对 `publicPath` 的修改需求都强烈建议来修改 `BASE_URL` 变量。
 
 
-### VUE_APP_API_PREFIX
+#### VUE_APP_API_PREFIX
 
 请求接口的 url 前缀，跟随后端开发提供的来改，若不需要前缀，可设置为「/」。
 
 
-### VUE_APP_LS_PREFIX
+#### VUE_APP_LS_PREFIX
 
 脚手架内置了 vue-ls 这个库来操作 storage，此变量是 namespace 字段配置。
 
 
-### VUE_APP_PRIVATE
+#### VUE_APP_PRIVATE
 
 是否属于私有云部署，就是是否部署到内网，如果项目本身使用到的组件很少，也可以设置为 `true`，以此来减少没有必要的 cdn 资源加载，如果使用了自定义主题功能，一定要设置成 `true`，否则自定义主题打包后不生效。
 
 
-### VUE_APP_USE_MOCKER
+#### VUE_APP_USE_MOCKER
 
 内置 `mocker-api`（可以看到网络请求）和 `mockjs2`（看不到网络请求）两个 mock 服务，设置为 `true` 标识使用 `mocker-api`，设置成 `false` 使用 `mockjs2`。
 
 
-### VUE_APP_BUILD_ENV
+#### VUE_APP_BUILD_ENV
 
 打包环境，部署到不同生产环境的区分。默认是 production，即生产环境，已在 package.json 中内置了预览环境、测试环境、演示环境和生产环境的配置，可根据业务自行添加更多的环境配置。
 
 
-### VUE_APP_THEME_COLOR
+#### VUE_APP_THEME_COLOR
 
 主题色，默认是跟随 `ant-design-vue` 的主题色 `#1890ff`，自定义主题色时，主色值只需要修改这一个地方即可，然和在 `config/config.s` 下的 `modifyVars` 字段中配置自定义的主题色变量。跟自定义主题色相关的改动，一般也只需要改动这两个地方即可。
 
 
-### VUE_APP_BUILD_REPORT
+#### VUE_APP_BUILD_REPORT
 
 是否开启打包分析，当发现打包后的 dist 资源文件很大时，设置为 `true`，每次打包完毕后会自动打开本次打包的可视化分析页面。
 
 
 :::tip 提示
-同时，脚手架基于 vue-cli 提供的 vue.config.js 配置能力，封装了对打包优化、主题配置和接口代理配置功能。
+除了上面的环境变量，脚手架基于 vue-cli 提供的 vue.config.js 配置能力，封装了对打包优化、主题配置和接口代理配置功能。
 :::
 
 ### 打包优化
