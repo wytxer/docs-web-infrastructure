@@ -27,10 +27,13 @@ npm i @wytxer/wy-cli -g
 ◯ 命令行工具（Node.js + TypeScript + Commander）
 ```
 
+- [中后台前端脚手架使用文档](/docs/template-vue2-manage.html)
+- [后台脚手架使用文档](/docs/template-node-egg.html)
+
 
 ## wy server
 
-启动一个 HTTP 静态资源服务。
+启动一个 HTTP 静态资源服务。（基于 http-server）
 
 ```bash
 # 指定 dist 目录启动服务

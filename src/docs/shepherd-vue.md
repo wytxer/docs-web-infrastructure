@@ -69,3 +69,5 @@ shepherd(config)
 ## GitHub
 
 [点我获取源代码](https://github.com/wytxer/shepherd-vue)
+
+组件已集成到[中后台前端脚手架](https://github.com/wytxer/template-vue2-manage)，欢迎使用~

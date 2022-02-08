@@ -5,7 +5,7 @@ title: 中后台前端脚手架
 
 ## 介绍
 
-基于 Vue.js 2.x 和 ant-design-vue 组件库且风格统一的用于快速构建中后台系统的脚手架。在线效果预览[点这里](http://tv2.manage.bszhct.com)
+基于 Vue.js 2.x 和 ant-design-vue 组件库且风格统一的用于快速构建中后台系统的脚手架。[在线效果预览](http://tv2.manage.bszhct.com)
 
 
 ## 兼容性
@@ -87,10 +87,13 @@ title: 中后台前端脚手架
 ```bash
 # 安装
 yarn install
+
 # 启动开发服务
 yarn serve
+
 # 生产环境打包
 yarn build
+
 # 测试环境打包
 yarn build:test
 ```
@@ -266,12 +269,12 @@ yarn build:test
 | method | 请求方式，支持 get、post、put、delete 等 |
 | data | 如果是 post，data 方式传递的参数是 json 类型，可以和下面的 params 字段一起使用 |
 | params | 传递的参数是字符串类型的，拼接在 url 后面的，类似 `/a/b?id=1&type=2` 这种，如果是 get 请求，只能通过 params 传递参数 |
-| headerType | 请求头类型，默认是 `json`，对应的 `Content-Type` 是 `application/json`，设置成 form 的时候，`Content-Type` 是 `application/x-www-form-urlencoded; charset=UTF-8`，设置成 `upload`，`Content-Type` 是 `multipart/form-data`，设置成 `download`，`headers.resType` 是 `blob`，会自动下载文件，配合 `fileName` 字段自定义下载文件的名称，设置成 `blob`，返回文件流信息 |
+| headerType | 请求头类型，默认是 `json`，对应的 `Content-Type` 是 `application/json`，设置成 `form` 的时候，`Content-Type` 是 `application/x-www-form-urlencoded; charset=UTF-8`，设置成 `upload`，`Content-Type` 是 `multipart/form-data`，设置成 `download`，`headers.resType` 是 `blob`，会自动下载文件，配合 `fileName` 字段自定义下载文件的名称，设置成 `blob`，返回文件流信息 |
 | fileName | 配合 `headerType` 等于 `download` 时使用，用来自定义下载文件的名称 |
 | closeAutoTips | 请求失败之后默认会抛出后端给的错误，`closeAutoTips` 设置为 `true` 可以关闭掉这个行为 |
 <br>
 
-接口 code 配置参见[这里](https://github.com/wytxer/template-vue2-manage/blob/main/src/utils/http.js#L7)
+[请求 code 配置](https://github.com/wytxer/template-vue2-manage/blob/main/src/utils/http.js#L7)
 
 使用示例：
 
@@ -524,7 +527,7 @@ if (this.$auth('listEdit')) {
 
 ## 样式
 
-脚手架内置了样式库，样式库使用[参见这里](/docs/style-utils.html)。
+脚手架内置了样式库。[样式库使用文档](/docs/style-utils.html)。
 
 脚手架也将 `ant-design-vue` 的主题变量添加到了全局，你可以在任意的 less 中使用其中的变量，就像这样：
 
@@ -537,14 +540,14 @@ if (this.$auth('listEdit')) {
 }
 ```
 
-完整的变量[参见这里](https://github.com/vueComponent/ant-design-vue/blob/master/components/style/themes/default.less)
+[完整的 less 变量](https://github.com/vueComponent/ant-design-vue/blob/master/components/style/themes/default.less)
 
 同时，脚手架为了方便扩展也自定义了一部分 less 变量，可以在 `src/components/index.less` 中找到。
 
 
 ## 使用模板库
 
-脚手架开发了一套配套的模板库，可以方便的创建各种组件和页面，极大提高开发效率，具体使用[参见这里](/docs/tv2m-template.html)
+脚手架开发了一套配套的模板库，可以方便的创建各种组件和页面，极大提高开发效率。[模板库使用文档](/docs/tv2m-template.html)
 
 
 ## 发布
@@ -566,7 +569,7 @@ yarn build:preview
 ```
 
 :::tip 提示
-预览环境是脚手架自带的环境，会将「定制」功能打包出来，具体效果可[参见这里](http://tv2.manage.bszhct.com)
+预览环境是脚手架自带的环境，会将「定制」功能打包出来。[脚手架视觉效果预览](http://tv2.manage.bszhct.com)
 :::
 
 
@@ -582,7 +585,7 @@ yarn build:preview
 
 ### 使用 wy app 部署
 
-`wy` 命令是 `wy-cli` 提供的命令，具体使用[参见这里](/docs/wy-cli.html)
+`wy` 命令是 `wy-cli` 提供的命令。[wy-cli&nbsp;使用文档](/docs/wy-cli.html)
 
 需要先执行 `yarn build` 打包出来 dist 静态资源包，然后执行 `wy tar` 打包成一个 Node.js 部署包。
 
