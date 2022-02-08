@@ -8,7 +8,7 @@
     </div>
     <div class="PT16 FBH">
       案号：
-      <ak-auto-tooltip title="（2020）粤0304民诉前调 123 号" text="描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描" class="FB1" />
+      <ak-auto-tooltip title="（9882）武0301民初888号" text="描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描" class="FB1" />
     </div>
     <div class="PT16 FBH">
       描述：
