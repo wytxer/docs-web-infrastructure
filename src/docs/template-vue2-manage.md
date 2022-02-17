@@ -5,7 +5,7 @@ title: 中后台前端脚手架
 
 ## 介绍
 
-基于 Vue.js 2.x 和 ant-design-vue 组件库且风格统一的用于快速构建中后台系统的脚手架。[在线效果预览](http://tv2.manage.bszhct.com)
+基于 Vue.js 2.x 和 ant-design-vue 组件库且风格统一的用于快速构建中后台系统的前端脚手架。[在线效果预览](http://tv2.manage.bszhct.com)
 
 
 ## 兼容性

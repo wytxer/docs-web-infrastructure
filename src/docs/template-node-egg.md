@@ -12,7 +12,7 @@ title: 后台脚手架
 
 | 模块 | 功能介绍 | 进度 |
 | --- | --- | --- |
-| 数据库操作 | 内置 ORM egg-sequelize 插件作为数据库操作库，可适配 Postgres、MySQL、MariaDB, SQLite 数据库 | √ |
+| 数据库操作 | 内置 ORM egg-sequelize 插件作为数据库操作库，可适配 Postgres、MySQL、MariaDB、SQLite 数据库 | √ |
 | 接口路由配置 | 内置 egg-router-plus 插件解决了路由命名空间问题 | √ |
 | 自动生成接口文档 | 内置 egg-swagger-doc 插件，按照约定书写接口注释即可自动生成接口使用文档 | √ |
 | 字段校验 | 内置 egg-validate-plus 插件作为字段校验，即可以单独使用，也可以配合 egg-swagger-doc 插件使用，既自动生成接口文档又实现了字段校验 | √ |
