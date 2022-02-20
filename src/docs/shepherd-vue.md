@@ -61,13 +61,10 @@ shepherd(config)
 </layout-code-box>
 
 
-## API
+## 代码和文档
 
-[传送门](https://shepherdjs.dev/docs/index.html)
+[shepherdjs API](https://shepherdjs.dev/docs/index.html)
 
-
-## GitHub
-
-[点我获取源代码](https://github.com/wytxer/shepherd-vue)
+[shepherd-vue GitHub 地址](https://github.com/wytxer/shepherd-vue)
 
 组件已集成到[中后台前端脚手架](https://github.com/wytxer/template-vue2-manage)，欢迎使用~

@@ -10,7 +10,7 @@ title: 中后台前端脚手架
 
 ## 兼容性
 
-| 谷歌浏览器 | 火狐浏览器 | Safari 浏览器 | Edge 浏览器 | IE11 |
+| Chrome | Firefox | Safari | Edge | IE11 |
 | --- | --- | --- | --- | --- |
 | √ | √ | √ | √ | √ |
 
@@ -43,7 +43,7 @@ title: 中后台前端脚手架
 
 ```bash
 .
-├── README.md              # 搞事之前请先白嫖一下我
+├── README.md              # 搞事之前请先读我
 ├── babel.config.js
 ├── config                 # 项目配置
 │   ├── config.js          # 提供给 vue.config.js 使用的自定义配置，抽离了相对独立部分
@@ -75,6 +75,9 @@ title: 中后台前端脚手架
 │   └── views             # 页面
 ├── tests                 # 单元测试
 │   └── unit
+├── .env                  # 通用的环境变量配置
+├── .env.development      # 开发环境变量配置
+├── .env.production       # 正式环境变量配置
 ├── vue.config.js         # vue-cli 提供的配置文件
 └── yarn.lock
 ```
@@ -137,7 +140,7 @@ yarn build:test
 
 #### VUE_APP_THEME_COLOR
 
-主题色，默认是跟随 `ant-design-vue` 的主题色 `#1890ff`，自定义主题色时，主色值只需要修改这一个地方即可，然和在 `config/config.s` 下的 `modifyVars` 字段中配置自定义的主题色变量。跟自定义主题色相关的改动，一般也只需要改动这两个地方即可。
+主题色，默认是跟随 `ant-design-vue` 的主题色 `#1890ff`，自定义主题色时，主色值只需要修改这一个地方即可，然后在 `config/config.s` 下的 `modifyVars` 字段中配置自定义的主题色变量。跟自定义主题色相关的改动，一般也只需要改动这两个地方即可。
 
 
 #### VUE_APP_BUILD_REPORT
@@ -369,13 +372,13 @@ export function querySelectData (params) {
 
 最后在需要使用该请求的页面导入使用即可。
 
-- 在 template 中使用：
+在 template 中使用：
 
 ```vue
 <ak-select :loadData="querySelectData" />
 ```
 
-- 在 js 中使用：
+在 JS 中使用：
 
 ```js
 querySelectData()
@@ -501,7 +504,7 @@ querySelectData()
 
 ## 权限
 
-脚手架支持按钮级别的权限控制，只需要在当前登陆的用户信息（`src/store/modules/user.js`）中返回对应的权限点即可。例如当前用户拥有列表页面的编辑、添加和删除权限，那对应的权限点配置如下：
+脚手架支持按钮级别的权限控制，只需要在当前登录的用户信息（`src/store/modules/user.js`）中返回对应的权限点即可。例如当前用户拥有列表页面的编辑、添加和删除权限，那对应的权限点配置如下：
 
 ```js
 {
