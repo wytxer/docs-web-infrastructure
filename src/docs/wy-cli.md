@@ -13,6 +13,7 @@ title: 小工具
 npm i @wytxer/wy-cli -g
 ```
 
+
 ## wy init
 
 初始化一个工程。支持在已经创建好的目录下执行这个命令，例如在 `project-name` 工程下执行 `wy init`，或者直接指定要创建的工程名称，例如：`wy init project-name`。
