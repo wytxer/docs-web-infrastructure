@@ -79,6 +79,10 @@ module.exports = {
           path: 'template-node-egg'
         },
         {
+          title: '命令行脚手架',
+          path: 'template-node-cli'
+        },
+        {
           title: '风格指南',
           path: 'v2-style-guide'
         },
