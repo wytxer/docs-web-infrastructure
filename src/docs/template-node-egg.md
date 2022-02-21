@@ -1,5 +1,5 @@
 ---
-title: 后台脚手架
+title: 后端脚手架
 ---
 
 
@@ -175,9 +175,9 @@ config.sequelize = {
 const apiPrefixName = 'api'
 // 接口完整前缀
 const apiPrefix = `/${apiPrefixName}`
-// 后台接口前缀，跟随业务系统修改
+// 后端接口前缀，跟随业务系统修改
 const manageApiPrefixName = 'manage'
-// 后台接口前缀
+// 后端接口前缀
 const manageApiPrefix = `/${manageApiPrefixName}`
 const userConfig = {
   // 应用名称，用于日志文件目录指定、cookie 的 key 指定，具有唯一性，默认是 app.name，也可以改成其他字符串
@@ -459,9 +459,4 @@ yarn stop
 
 ## GitHub
 
-[后台脚手架 GitHub 地址](https://github.com/wytxer/template-node-egg)
-
-
-## 常见问题
-
-待补充
+[后端脚手架 GitHub 地址](https://github.com/wytxer/template-node-egg)

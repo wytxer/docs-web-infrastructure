@@ -68,4 +68,4 @@ import '@wytxer/style-utils/lib/common.less'
 
 ## GitHub
 
-[点我获取源代码](https://github.com/wytxer/style-utils)
+[样式库 GitHub 地址](https://github.com/wytxer/style-utils)

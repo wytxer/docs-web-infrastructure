@@ -1,10 +1,10 @@
 ---
-title: 小工具
+title: WY CLI
 ---
 
 ## 介绍
 
-开箱即用的大前端脚手架创建工具。
+一个开箱即用的大前端脚手架创建工具。
 
 
 ## 安装
@@ -24,12 +24,13 @@ npm i @wytxer/wy-cli -g
 ◯ 中后台前端脚手架（Vue.js 2.x + Vue Router + Vuex + Ant Design Vue）
 ◯ 组件（Vue.js 2.x + Vue Router + Vuex）
 ◯ 示例（Vue.js 2.x + Vue Router + Vuex）
-◯ 后台脚手架（Node.js + Egg.js + Sequelize）
-◯ 命令行工具（Node.js + TypeScript + Commander）
+◯ 后端脚手架（Node.js + Egg.js + Sequelize）
+◯ 命令行脚手架（Node.js + TypeScript + Commander）
 ```
 
 - [中后台前端脚手架使用文档](/docs/template-vue2-manage.html)
-- [后台脚手架使用文档](/docs/template-node-egg.html)
+- [后端脚手架使用文档](/docs/template-node-egg.html)
+- [命令行脚手架使用文档](/docs/template-node-cli.html)
 
 
 ## wy server
@@ -66,4 +67,4 @@ wy tar -b
 
 ## GitHub
 
-[点我获取源代码](https://github.com/wytxer/wy-cli)
+[wy-cli GitHub 地址](https://github.com/wytxer/wy-cli)

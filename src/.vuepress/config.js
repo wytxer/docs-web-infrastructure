@@ -7,7 +7,7 @@ function resolve (dir) {
 
 module.exports = {
   title: 'Web Infrastructure',
-  description: '前端基础建设文档库，包含中后台前端脚手架、组件库、后台脚手架等。',
+  description: '前端基础建设文档库，包含中后台前端脚手架、组件库、后端脚手架等。',
   base: '/',
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }]
@@ -23,8 +23,8 @@ module.exports = {
       { text: '使用说明', link: '/guide/introduction' },
       { text: '组件库', link: '/components/quick-start' },
       { text: '中后台前端脚手架', link: '/docs/template-vue2-manage' },
-      { text: '后台脚手架', link: '/docs/template-node-egg' },
-      { text: '小工具', link: '/docs/wy-cli' }
+      { text: '后端脚手架', link: '/docs/template-node-egg' },
+      { text: 'WY CLI', link: '/docs/wy-cli' }
     ],
     // 侧边栏设置
     sidebar: {
@@ -71,11 +71,11 @@ module.exports = {
       ],
       '/docs/': [
         {
-          title: '小工具',
+          title: 'WY CLI',
           path: 'wy-cli'
         },
         {
-          title: '后台脚手架',
+          title: '后端脚手架',
           path: 'template-node-egg'
         },
         {

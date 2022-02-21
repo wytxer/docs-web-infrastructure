@@ -108,4 +108,4 @@ title: 给 template-vue2-manage 脚手架提供的模板库。
 
 ## GitHub
 
-[点我获取源代码](https://github.com/wytxer/template-vue2-manage/tree/main/src/views/template)
+[模板库 GitHub 地址](https://github.com/wytxer/template-vue2-manage/tree/main/src/views/template)
