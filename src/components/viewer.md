@@ -16,6 +16,13 @@ title: Viewer 文件预览
   </highlight-code>
 </layout-code-box>
 
+<layout-code-box title="可拖动" description="文件预览框支持拖动。">
+  <demo-viewer-wrap9></demo-viewer-wrap9>
+  <highlight-code slot="codeText" lang="vue">
+<<< @/docs/.vuepress/components/demo/viewer/wrap9.vue
+  </highlight-code>
+</layout-code-box>
+
 <layout-code-box title="指定文件列表的文件类型" description="通过 fileType 字段指定统一的文件类型，使用 listType 设置文件列表的展示形式。">
   <demo-viewer-wrap2 />
   <highlight-code slot="codeText" lang="vue">
@@ -144,6 +151,12 @@ title: Viewer 文件预览
         }, {
           0: 'showDownload',
           1: '是否显示下载按钮',
+          2: 'Boolean',
+          3: 'true | false',
+          4: 'false'
+        }, {
+          0: 'drag',
+          1: '文件预览框是否需要拖动',
           2: 'Boolean',
           3: 'true | false',
           4: 'false'
