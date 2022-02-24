@@ -17,9 +17,9 @@ title: Viewer 文件预览
 </layout-code-box>
 
 <layout-code-box title="可拖动" description="文件预览框支持拖动。">
-  <demo-viewer-wrap9></demo-viewer-wrap9>
+  <demo-viewer-wrap9 />
   <highlight-code slot="codeText" lang="vue">
-<<< @/docs/.vuepress/components/demo/viewer/wrap9.vue
+<<< @/src/.vuepress/components/demo/viewer/wrap9.vue
   </highlight-code>
 </layout-code-box>
 
