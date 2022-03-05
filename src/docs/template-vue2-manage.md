@@ -113,6 +113,11 @@ yarn build:test
 路由地址前缀，vue-cli 提供的环境变量，一般不需要改，效果同 vue.config.js 中的 `publicPath`，若有对 `publicPath` 的修改需求都强烈建议来修改 `BASE_URL` 变量。
 
 
+#### VUE_APP_ROUTER_BASE_URL
+
+路由地址前缀，用于 Vue Router 的 `base` 配置，同时也用于 location.href 等强刷页面跳转时的路径拼接。
+
+
 #### VUE_APP_API_PREFIX
 
 请求接口的 url 前缀，跟随后端开发提供的来改，若不需要前缀，可设置为「/」。
