@@ -11,8 +11,6 @@ import 'ant-design-vue/dist/antd.css'
 import 'highlight.js/styles/vs.css'
 import '@wytxer/style-utils/lib/common.less'
 
-import Kit from '@wytxer/antdv-kit'
-
 export default ({
   // VuePress 正在使用的 Vue 构造函数
   Vue,
@@ -37,6 +35,10 @@ export default ({
       import('@wytxer/shepherd-vue').then(m => {
         Vue.use(m.default)
       })
+
+      import('@wytxer/antdv-kit').then(m => {
+        Vue.use(m.default)
+      })
     }
   })
 
@@ -49,7 +51,6 @@ export default ({
   })
 
   Vue.use(Antd)
-  Vue.use(Kit)
 
   Vue.prototype.$axios = axios
 }
