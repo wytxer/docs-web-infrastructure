@@ -451,9 +451,10 @@ yarn stop
 
 在 JS 文件中输入 `wy-egg` 即可选择需要的模板代码：
 
-<div class="image-box" style="text-align: left">
-  <img src="/docs/wy-vscode-snippets.png" style="width: 50%" />
+<div class="video-box" style="text-align: left">
+  <video src="/docs/wy-vscode-egg-sequelize.mov" poster="/docs/wy-vscode-snippets.png" controls="controls" autoplay="autoplay" preload="none" loop style="width: 50%"></video>
 </div>
+
 
 ### 多表查询使用 required 参数
 
