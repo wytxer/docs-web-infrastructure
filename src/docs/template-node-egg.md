@@ -50,10 +50,11 @@ title: 后端脚手架
 │   ├── config.unittest.js # 单元测试环境特有的配置项
 │   └── plugin.js          # 插件，可在里面自定义启用禁用某些插件
 ├── jsconfig.json
-├── note
+├── db
 │   ├── database.sql       # 创建数据库脚本
-│   ├── note.md            # 项目开发笔记
-│   └── tables.sql         # 创建 user 表脚本
+│   └── tables.sql         # 创建数据表脚本
+├── docs
+│   ├── note.md            # 项目开发随记
 ├── package.json
 ├── test                   # 单元测试
 │   └── app
@@ -115,15 +116,14 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `open_id` varchar(255) NOT NULL COMMENT '同微信的 openid',
   `union_id` varchar(255) DEFAULT NULL COMMENT '同微信的 unionid，作为预留字段，不一定有值',
-  `nick_name` varchar(255) NOT NULL COMMENT '昵称，同微信的 nickName',
+  `nick_name` varchar(255) CHARACTER SET utf8mb4 NOT NULL COMMENT '昵称，同微信的 nickName',
   `password` varchar(255) DEFAULT NULL COMMENT '登录密码，作为预留字段，不一定有值',
   `avatar_url` text NOT NULL COMMENT '头像，同微信的 avatarUrl',
-  `phone` varchar(255) DEFAULT NULL COMMENT '手机号，可能为空',
+  `phone` varchar(255) DEFAULT NULL COMMENT '手机号码，可能为空',
   `gender` int(11) DEFAULT NULL COMMENT '性别，可能为空',
   `country` varchar(255) DEFAULT NULL COMMENT '国家，可能为空',
   `province` varchar(255) DEFAULT NULL COMMENT '省份，可能为空',
@@ -133,13 +133,13 @@ CREATE TABLE `user` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES (1, 'o8FXk5E4u7hwaguN6kSq-KPXApJ1', NULL, '测试账号', NULL, 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180520%2F0473e00bdfd2476fbe0c228a45a1652c.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1628131130&t=05ee794a54bad8edd2fd8bb2536db5b9', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-01 23:59:59', '2022-01-01 23:59:59', '2022-01-01 23:59:59');
+INSERT INTO `user` VALUES (1000, 'o8FXk5E4u7hwaguN6kSq-KPXApJ1', NULL, '测试账号', NULL, 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180520%2F0473e00bdfd2476fbe0c228a45a1652c.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1628131130&t=05ee794a54bad8edd2fd8bb2536db5b9', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-01 23:59:59', '2022-01-01 23:59:59', '2022-01-01 23:59:59');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
@@ -171,61 +171,31 @@ config.sequelize = {
 自定义的应用配置，修改后全局生效。
 
 ```js
+/**
+ * 自定义的应用配置，修改后全局生效
+ */
 // 接口前缀名称，跟随业务系统修改
 const apiPrefixName = 'api'
 // 接口完整前缀
 const apiPrefix = `/${apiPrefixName}`
-// 后端接口前缀，跟随业务系统修改
-const manageApiPrefixName = 'manage'
-// 后端接口前缀
-const manageApiPrefix = `/${manageApiPrefixName}`
 const userConfig = {
   // 应用名称，用于日志文件目录指定、cookie 的 key 指定，具有唯一性，默认是 app.name，也可以改成其他字符串
   appName: app.name,
   apiPrefixName,
   apiPrefix,
-  manageApiPrefixName,
-  manageApiPrefix,
   // 默认的 code 码和错误提示信息配置，只需要改这一个地方即可
   resCode: {
+    // 服务器异常的 code 标识和提示，一般都不需要改
+    serverError: { code: 500, message: '服务器异常' },
     // 成功的 code 标识
-    success: {
-      code: 0
-    },
+    success: { code: 0 },
     // 出错的 code 标识和提示
-    error: {
-      code: 602, message: '参数异常'
-    },
-    // 服务器异常的 code 标识和提示
-    serverError: {
-      code: 500, message: '服务器异常'
-    },
+    error: { code: 602, message: '参数异常' },
     // 未登录的 code 标识和提示
-    notLogged: {
-      code: 601, message: '请先登录后再操作'
-    }
+    notLogged: { code: 601, message: '请先登录后再操作' }
   }
 }
 ```
-
-### Cookie 配置
-
-脚手架内置了应用（例如小程序）接口服务和中后台接口服务，其中的字段配置基本不需要改。中后台接口服务是可选的，若是不想要放在一起，可直接忽略。
-
-应用接口服务使用 `ctx.session.[keyName]` 来设置和获取值，例如要将 id 字段设置为 cookie，那么设置 cookie 的写法就是：
-
-```js
-ctx.session.id = 1
-```
-
-获取 cookie 就是：
-
-```js
-ctx.service.user.info(ctx.session.id)
-```
-
-而中后台接口服务获取需要使用 `ctx.cookies.get(key, cookie)` 方法，具体用法参见这里[ctx.cookies 使用文档](https://eggjs.org/zh-cn/core/cookie-and-session.html)。
-
 
 ### 安全策略配置
 
@@ -340,18 +310,17 @@ const Service = require('egg').Service
 class LogService extends Service {
   // 获取日志列表
   async logs(actionType) {
-    const { ctx } = this
-    try {
-      const data = await ctx.model.Log.findAll({
-        where: {
-          actionType
-        }
+    const { model } = this.ctx
+
+    return await model.Log.findAll({
+      where: {
+        actionType
+      }
+    })
+      .then(res => {
+        if (res) return res.map(item => item.toJSON())
+        return res
       })
-      return ctx.helper.clone(data)
-    } catch (error) {
-      ctx.logger.error(error)
-    }
-    return false
   }
 }
 
@@ -394,6 +363,7 @@ class LogController extends Controller {
    */
   async logs() {
     const { ctx } = this
+    const { service, helper } = ctx
     const { actionType } = ctx.request.query
 
     // 参数校验
@@ -403,11 +373,11 @@ class LogController extends Controller {
     const passed = await ctx.validate(rules, ctx.request.query)
     if (!passed) return
 
-    const data = await ctx.service.log.logs(actionType)
+    const data = await service.log.logs(actionType)
     if (data) {
-      this.ctx.helper.success(data)
+      helper.success(data)
     } else {
-      this.ctx.helper.error(null, '日志列表失败')
+      helper.error(null, '日志列表失败')
     }
   }
 }
@@ -461,33 +431,48 @@ yarn stop
 
 [Sequelize 官方文档](https://sequelize.org/master/)
 
+### 快捷语法
+
+针对开发中高频出现的代码块封装了一个 VSCode 插件，目前支持的模板有：
+
+- egg - controller 骨架
+- egg - controller 基础结构
+- egg - controller 方法骨架
+- egg - controller 参数校验
+- egg - service 骨架
+- egg - service 方法骨架
+- egg - service 分页骨架
+- egg - sequelize 数据转对象
+- egg - sequelize 数据转数组
+- egg - sequelize 分页数据字段转换
+- egg - sequelize 事务
+
+模板库支持在 Egg + Sequelize 组合的技术栈中使用，欢迎下载体验：[WY VSCODE SNIPPETS](https://marketplace.visualstudio.com/items?itemName=wytxer.wy-vscode-snippets)
+
+在 JS 文件中输入 `wy-egg` 即可选择需要的模板代码：
+
+<div class="image-box" style="text-align: left">
+  <img src="/docs/wy-vscode-snippets.png" style="width: 50%" />
+</div>
+
 ### 多表查询使用 required 参数
 
 ```js
 async info() {
-  const { ctx } = this
-  try {
-    const res = await ctx.model.School.findOne({
-      where: { id },
-      include: [{
-        model: ctx.model.College,
-        as: 'colleges',
-        attributes: [ 'id', 'name' ],
-        // https://sequelize.org/master/manual/eager-loading.html#required-eager-loading
-        // 查不到数据的时候，返回带结构的数据，例如返回空数组、空对象
-        // 当复杂的多表查询中有对嵌套的 include 查询设置 where 条件时，返回的结果是所有查询条件都满足的数据
-        required: false
-      }]
-    })
-      .then(async res => {
-        if (res) {
-          await res.update(values)
-        }
-      })
-    return ctx.helper.clone(res)
-  } catch (error) {
-    ctx.logger.error(error)
-  }
+  const { model } = this.ctx
+
+  return await model.School.findOne({
+    where: { id },
+    include: [{
+      model: model.College,
+      as: 'colleges',
+      attributes: [ 'id', 'name' ],
+      // https://sequelize.org/master/manual/eager-loading.html#required-eager-loading
+      // 查不到数据的时候，返回带结构的数据，例如返回空数组、空对象
+      // 当复杂的多表查询中有对嵌套的 include 查询设置 where 条件时，返回的结果是所有查询条件都满足的数据
+      required: false
+    }]
+  })
 }
 ```
 
@@ -495,28 +480,19 @@ async info() {
 
 ```js
 async info() {
-  const { ctx } = this
-  try {
-    const res = await ctx.model.School.findAndCountAll({
-      limit: parseInt(values.pageSize),
-      where: { id },
-      // 分页条数不计算 include 里面的数据
-      distinct: true,
-      include: [{
-        model: ctx.model.College,
-        as: 'colleges',
-        attributes: [ 'id', 'name' ]
-      }]
-    })
-      .then(async res => {
-        if (res) {
-          await res.update(values)
-        }
-      })
-    return ctx.helper.clone(res)
-  } catch (error) {
-    ctx.logger.error(error)
-  }
+  const { model } = this.ctx
+
+  return await ctx.model.School.findAndCountAll({
+    limit: parseInt(values.pageSize),
+    where: { id },
+    // 分页条数不计算 include 里面的数据
+    distinct: true,
+    include: [{
+      model: ctx.model.College,
+      as: 'colleges',
+      attributes: [ 'id', 'name' ]
+    }]
+  })
 }
 ```
 
