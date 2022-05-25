@@ -439,6 +439,7 @@ yarn stop
 - egg - controller 基础结构
 - egg - controller 方法骨架
 - egg - controller 参数校验
+- egg - controller swagger 注释
 - egg - service 骨架
 - egg - service 方法骨架
 - egg - service 分页骨架
