@@ -64,20 +64,20 @@ title: 后端脚手架
 
 ## 常用命令
 
-推荐使用 `yarn` 来安装依赖。
+推荐使用 `yarn` 来管理依赖。
 
 ```bash
 # 安装
 yarn install
 
 # 启动开发
-yarn dev
+yarn run dev
 
 # 生产环境启动
-yarn start
+yarn run start
 
 # 生产环境停止
-yarn stop
+yarn run stop
 ```
 
 
@@ -145,7 +145,7 @@ COMMIT;
 SET FOREIGN_KEY_CHECKS = 1;
 ```
 
-然后 `yarn dev` 启动开发，若是第一次启动，可能需要在 `config/config.local.js` 修改一下密码配置：
+然后 `yarn run dev` 启动开发，若是第一次启动，可能需要在 `config/config.local.js` 修改一下密码配置：
 
 ```js
 config.sequelize = {
@@ -417,13 +417,13 @@ config.sequelize = {
 启动：
 
 ```bash
-yarn start
+yarn run start
 ```
 
 停止：
 
 ```bash
-yarn stop
+yarn run stop
 ```
 
 

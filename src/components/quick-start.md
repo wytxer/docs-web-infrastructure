@@ -5,21 +5,15 @@
 
 ## 安装
 
-```bash
-# npm
-npm i @wytxer/antdv-kit
+推荐使用 `yarn` 来管理依赖。
 
-# yarn
+```bash
 yarn add @wytxer/antdv-kit
 ```
 
 组件库依赖于 ant-design-vue 1.x 版本，如果没有安装：
 
 ```bash
-# npm
-npm i ant-design-vue@^1.7.8
-
-# yarn
 yarn add ant-design-vue@^1.7.8
 ```
 

@@ -85,20 +85,20 @@ title: 中后台前端脚手架
 
 ## 常用命令
 
-推荐使用 `yarn` 来安装依赖。
+推荐使用 `yarn` 来管理依赖。
 
 ```bash
 # 安装
 yarn install
 
 # 启动开发服务
-yarn serve
+yarn run dev
 
 # 生产环境打包
-yarn build
+yarn run build
 
 # 测试环境打包
-yarn build:test
+yarn run build:test
 ```
 
 
@@ -564,16 +564,16 @@ if (this.$auth('listEdit')) {
 
 ```bash
 # 生产环境打包
-yarn build
+yarn run build
 
 # 测试环境打包
-yarn build:test
+yarn run build:test
 
 # 演示环境打包
-yarn build:demo
+yarn run build:demo
 
 # 预览环境打包
-yarn build:preview
+yarn run build:preview
 ```
 
 :::tip 提示
@@ -595,7 +595,7 @@ yarn build:preview
 
 `wy` 命令是 `wy-cli` 提供的命令。[wy-cli&nbsp;使用文档](/docs/wy-cli.html)
 
-需要先执行 `yarn build` 打包出来 dist 静态资源包，然后执行 `wy tar` 打包成一个 Node.js 部署包。
+需要先执行 `yarn run build` 打包出来 dist 静态资源包，然后执行 `wy tar` 打包成一个 Node.js 部署包。
 
 然后将部署包上传到后端服务器，解压后在根目录执行 `wy app` 命令一键启动即可。
 

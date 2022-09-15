@@ -14,11 +14,9 @@ title: 样式库
 
 ## 安装
 
-```bash
-# npm
-npm i @wytxer/style-utils
+推荐使用 `yarn` 来管理依赖。
 
-# yarn
+```bash
 yarn add @wytxer/style-utils
 ```
 
@@ -27,10 +25,6 @@ yarn add @wytxer/style-utils
 1、安装 less 编译器：
 
 ```bash
-# npm
-npm i less@^3.13.1 less-loader@^4.1.0 -D
-
-# yarn
 yarn add less@^3.13.1 less-loader@^4.1.0 -D
 ```
 

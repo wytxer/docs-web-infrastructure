@@ -15,13 +15,11 @@ title: 新手引导组件
 
 ## 快速开始
 
+推荐使用 `yarn` 来管理依赖。
+
 1、安装
 
 ```bash
-# npm
-npm i @wytxer/shepherd-vue
-
-# yarn
 yarn add @wytxer/shepherd-vue
 ```
 

@@ -7,10 +7,10 @@
 
 ```bash
 # 开发
-yarn dev
+yarn run dev
 
 # 打包
-yarn build
+yarn run build
 ```
 
 

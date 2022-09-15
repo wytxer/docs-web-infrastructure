@@ -41,20 +41,20 @@ title: 命令行脚手架
 
 ## 常用命令
 
-推荐使用 `yarn` 来安装依赖。
+推荐使用 `yarn` 来管理依赖。
 
 ```bash
 # 安装
 yarn install
 
 # 启动开发
-yarn dev
+yarn run dev
 
 # 打包
-yarn build
+yarn run build
 
 # 发布
-npm publish
+yarn run publish
 ```
 
 
