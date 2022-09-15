@@ -17,6 +17,7 @@ export default {
       const driver = this.$shepherd()
 
       driver.addSteps([{
+        canClickTarget: false,
         attachTo: {
           element: document.querySelector('#app header .home-link'),
           on: 'auto'
@@ -30,6 +31,7 @@ export default {
           text: '下一步'
         }]
       }, {
+        canClickTarget: false,
         attachTo: {
           element: document.querySelector('#driver-btn'),
           on: 'auto'
