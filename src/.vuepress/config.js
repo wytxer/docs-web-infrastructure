@@ -6,18 +6,18 @@ function resolve (dir) {
 }
 
 module.exports = {
-  title: 'Web Infrastructure',
+  title: '程序员未央',
   description: '前端基础建设文档库，包含中后台前端脚手架、组件库、后端脚手架等。',
   base: '/',
   head: [
-    ['link', { rel: 'icon', href: '/favicon.svg' }],
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['script', { async: true, src: 'https://hm.baidu.com/hm.js?babee2d4d8c9595ad79d48431259c311' }]
   ],
   dest: './dist',
   port: 9901,
   theme: 'antdocs',
   themeConfig: {
-    logo: '/favicon.svg',
+    logo: '/logo.png',
     // 顶部导航栏配置
     nav: [
       { text: '主页', link: '/' },

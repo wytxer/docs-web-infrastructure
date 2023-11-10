@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /favicon.svg
+heroImage: /logo.png
 actionText: 快速开始
 actionLink: /guide/introduction
 features:
